@@ -1,12 +1,14 @@
 package org.agoncal.quarkus.microservices.book;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.spec.ECGenParameterSpec;
 
 import javax.crypto.KeyGenerator;
 
 public class InsufficientKeySize {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         KeyPairGenerator keyPairGen1 = KeyPairGenerator.getInstance("RSA");
         keyPairGen1.initialize(1024); // BAD: Key size is less than 2048
 
