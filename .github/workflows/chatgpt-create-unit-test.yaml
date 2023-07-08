@@ -1,0 +1,20 @@
+name: Suggest tests for new functions
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: Suggest tests for new functions
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Create patch file & store in workspace
+      run: git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} &> ${GITHUB_WORKSPACE}/patch
+    - name: Ask ChatGPT for unit tests for new functions
+      uses: zebroc/chatgpt-create-unit-tests@master
+      env:
+        OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
