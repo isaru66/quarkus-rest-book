@@ -14,7 +14,7 @@ jobs:
     - name: Create patch file & store in workspace
       run: git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} &> ${GITHUB_WORKSPACE}/patch
     - name: Ask ChatGPT for unit tests for new functions
-      uses: zebroc/chatgpt-create-unit-tests@master
+      uses: zebroc/chatgpt-create-unit-tests@main
       env:
         OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
