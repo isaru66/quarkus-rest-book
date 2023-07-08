@@ -15,6 +15,9 @@ jobs:
       run: git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} &> ${GITHUB_WORKSPACE}/patch
     - name: Ask ChatGPT for unit tests for new functions
       uses: zebroc/chatgpt-create-unit-tests@main
+      with:
+        prompts: '{"code":"Do a code review for this:\n\n%s","sec":"Do a security review for this:\n\n%s"}'
+        maxpatchsize: '10'
       env:
         OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
